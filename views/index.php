@@ -5,11 +5,13 @@ include "./header.php"
     <p>
         아래는 겨울 왕국에 대한 결과입니다
     </p>
-    <p>
+    <ol>
         <?php
-        echo json_encode(search_movie("겨울왕국"), JSON_PRETTY_PRINT);
+        foreach (json_decode(search_movie("겨울왕국"))->items as $item){
+            echo "<li>".$item -> title."</li>";
+        };
         ?>
-    </p>
+    </ol>
 <?php
 include "./footer.php"
 ?>
