@@ -42,7 +42,7 @@ function update_post_image($post_id, $post_img_url){
         $stmt = $conn->prepare($query);
         $result = $stmt->execute(array($post_img_url, $post_id));
         if($result){
-            return "Success"
+            return "Success";
         }
         else{
             return "Fail";
