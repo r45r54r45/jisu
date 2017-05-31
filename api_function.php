@@ -1,6 +1,4 @@
-<?php
-
-echo search_movie("해리포터");
+﻿<?php
 
 function search_movie($movie_name){
     $client_id = "vfB2ILfkGdh1vk2DgPG5";
