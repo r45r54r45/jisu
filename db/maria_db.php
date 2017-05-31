@@ -1,4 +1,6 @@
 <?php
+require_once "query.php";
+
 // 이페이지에서는 데이터베이스에 관한 모든 연산을 수행한다
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -19,8 +21,7 @@ function pdo_sql_connect(){
 function make_post($user_id, $lat, $lng, $location_name, $movie_name, $director_name, $title, $content){
     try{
         $conn = pdo_sql_connect();
-        $query = "INSERT INTO post (user_id, lat, lng, location_name, movie_name, director_name title, content) 
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = INSERT_POST;
         $stmt = $conn->prepare($query);
         $result = $stmt->execute(array($user_id, $lat, $lng, $location_name, $movie_name, $director_name, $title, $content));
         if($result){
@@ -38,7 +39,7 @@ function make_post($user_id, $lat, $lng, $location_name, $movie_name, $director_
 function update_post_image($post_id, $post_img_url){
     try{
         $conn = pdo_sql_connect();
-        $query = "UPDATE post SET post_img_url = ? WHERE id = ?";
+        $query = UPDATE_POST;
         $stmt = $conn->prepare($query);
         $result = $stmt->execute(array($post_img_url, $post_id));
         if($result){
@@ -57,7 +58,7 @@ function update_post_image($post_id, $post_img_url){
 function make_reply($user_id, $post_id, $content){
     try{
         $conn = pdo_sql_connect();
-        $query = "INSERT INTO reply (user_id, post_id, content) VALUES (?, ?, ?)";
+        $query = INSERT_REPLY;
         $stmt = $conn->prepare($query);
         $result = $stmt->execute(array($user_id, $post_id, $content));
         if($result){
@@ -76,7 +77,7 @@ function make_reply($user_id, $post_id, $content){
 function get_post($post_id){
     try{
         $conn = pdo_sql_connect();
-        $query = "SELECT * FROM post WHERE id = ?";
+        $query = SELECT_POST;
         $stmt = $conn->prepare($query);
         $result = $stmt->execute(array($post_id));
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -90,7 +91,7 @@ function get_post($post_id){
 function get_posts_by_moive_name($movie_name, $director){
     try{
         $conn = pdo_sql_connect();
-        $query = "SELECT * FROM post WHERE movie_name = ? AND director_name = ?";
+        $query = SELECT_POST_BY_MOVIE_NAME_AND_DIRECTOR;
         $stmt = $conn->prepare($query);
         $result = $stmt->execute(array($movie_name, $director));
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -104,7 +105,7 @@ function get_posts_by_moive_name($movie_name, $director){
 function get_posts_by_location_name($location_name){
     try{
         $conn = pdo_sql_connect();
-        $query = "SELECT * FROM post WHERE location_name = ?";
+        $query = SELECT_POST_BY_LOCATION_NAME;
         $stmt = $conn->prepare($query);
         $result = $stmt->execute(array($location_name));
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -118,9 +119,7 @@ function get_posts_by_location_name($location_name){
 function get_posts_by_boundary($lat, $lng, $distance){
     try{
         $conn = pdo_sql_connect();
-        $query = "SELECT *,	
-        (6371*acos(cos(radians(37))*cos( radians(?)) * cos( radians(?) - radians(127) ) + sin( radians(37) ) * sin( radians(?)))) AS distance
-                FROM post HAVING distance <= ? ORDER BY distance LIMIT 0, 5";
+        $query = SELECT_POST_BY_LOCATION_RADIUS;
         $stmt = $conn->prepare($query);
         $result = $stmt->execute(array($lat, $lng, $lat, $distance));
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -134,7 +133,7 @@ function get_posts_by_boundary($lat, $lng, $distance){
 function get_all_posts(){
     try{
         $conn = pdo_sql_connect();
-        $query = "SELECT * FROM post";
+        $query = SELECT_ALL_POST;
         $stmt = $conn->prepare($query);
         $result = $stmt->execute(array());
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -148,7 +147,7 @@ function get_all_posts(){
 function get_replies($post_id){
     try{
         $conn = pdo_sql_connect();
-        $query = "SELECT * FROM reply WHERE post_id = ?";
+        $query = SELECT_REPLY;
         $stmt = $conn->prepare($query);
         $result = $stmt->execute(array($post_id));
         return $stmt->fetch(PDO::FETCH_ASSOC);

@@ -1,5 +1,5 @@
 <?php
-require_once("maria_db.php");
+require_once("../db/maria_db.php");
 
 $type = $_POST['type']; // 0 : post_id, 1 : movie_name, director_name, 2: location_name, 3: distance, 4: all posts
 
