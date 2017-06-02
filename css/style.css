@@ -1,7 +1,10 @@
+
+
 nav ul a,
 nav .brand-logo {
   color: #444;
 }
+
 
 p {
   line-height: 2rem;
@@ -35,6 +38,7 @@ p {
   #index-banner .section {
     top: 0;
   }
+
 }
 
 .icon-block {
