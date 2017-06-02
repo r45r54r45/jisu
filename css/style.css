@@ -1,4 +1,7 @@
-
+nav{
+  border: 0px;
+  box-shadow: 0 0 0 0;
+}
 
 nav ul a,
 nav .brand-logo {
@@ -55,5 +58,41 @@ footer.page-footer {
 .modal-content h4 {
   margin-bottom: 50px;
 }
+
+
+/* Slider Indicators */
+.indicators {
+    top:30%;
+    width:99%;
+    z-index:2;
+    padding:10px;
+    margin:0 auto;
+}
+
+.indicators > .indicator-item:after {
+    color:#fff;
+    font-size:5em;
+    display:inline;
+}
+
+.indicators .indicator-item:first-of-type {
+    float:left;
+}
+.indicators .indicator-item:first-of-type:after {
+    content:"‹";
+}
+
+.indicators .indicator-item:last-of-type {
+    float:right;
+}
+.indicators .indicator-item:last-of-type:after {
+    content:"›";
+}
+
+.indicators .indicator-item, .indicators .indicator-item.active {
+    background-color:transparent !important;
+    border-radius:0;
+}
+
 
 

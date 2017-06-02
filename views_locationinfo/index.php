@@ -2,6 +2,7 @@
 <?php
 include "./header.php"
 ?>
+
 <!--index banner 1: Map/Search Bar -->
 
   <div id="index-banner" class="parallax-container">
@@ -12,21 +13,7 @@ include "./header.php"
         <div class="row center">
           <h5 class="header col s12 light" style="color: black">Now you are at</h5>
         </div>
-        <div class="row center" style="width: 70%; margin: auto">
-          <nav>
-          <form>
-          <div class="nav-wrapper">
-            <div class = "input-field">
-              <input type="search" id="search" placeholder="Yonsei University, Seoul, South Korea">
-              <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-              <i class="material-icons">close</i>
-              
-            </div>
-          </div>  
-          </form>
-          </nav>
-        </div>
-        <br><br>
+
 
       </div>
     </div>
@@ -34,17 +21,21 @@ include "./header.php"
   </div>
 
 
-<!-- Container 1: Near Posts -->
+
+<!-- Container : Related Posts -->
 
 
   <div class="container">
     <div class="section">
-      <div class="row center">
-          <h5 class="header col s12 light" style="color: black">Near Posts</h5>
+      <div class="row center" style="margin-top: 50px">
+          <h5 class="header col s12 light" style="color: black">Related Posts</h5>
       </div>
 
+      
 
-      <!--   Near Posts / Carousel   -->
+
+
+      <!--   Related / Carousel -->  
 
       <div class="row">
         
@@ -61,90 +52,11 @@ include "./header.php"
   </div>
 
 
-  <!-- Near Related Movies : Silder -->
 
 
-  <div class="slider">
-    <ul class="slides">
-      <li>
-        <img src="http://lorempixel.com/580/250/nature/1"> <!-- random image -->
-        <div class="caption center-align">
-          <h3>Movies related to your location</h3>
-          <h5 class="light grey-text text-lighten-3">Toy Story</h5>
-        </div>
-      </li>
-      <li>
-        <img src="http://lorempixel.com/580/250/nature/2"> <!-- random image -->
-        <div class="caption left-align">
-          <h3>Movies related to your location</h3>
-          <h5 class="light grey-text text-lighten-3">Snow White</h5>
-        </div>
-      </li>
-      <li>
-        <img src="http://lorempixel.com/580/250/nature/3"> <!-- random image -->
-        <div class="caption right-align">
-          <h3>Movies related to your location</h3>
-          <h5 class="light grey-text text-lighten-3">Beauty and the Beast</h5>
-        </div>
-      </li>
-      <li>
-        <img src="http://lorempixel.com/580/250/nature/4"> <!-- random image -->
-        <div class="caption center-align">
-          <h3>This is our big Tagline!</h3>
-          <h5 class="light grey-text text-lighten-3">Mulan</h5>
-        </div>
-      </li>
-    </ul>
-  </div>
 
 
-<!-- movie search -->
 
-
-  <div class="container" style="padding-top: 100px; padding-bottom: 150px">
-    <div class="section">
-
-      <div class="row">
-        <div class="col s12 center">
-          
-          <h5 class="header col s12 light" style="color: black">Didn't you find the movie you want among above?</h5>
-        </div>
-      </div>
-
-        <div class="row" style="width: 70%; margin: auto">
-          <nav>
-          <form>
-          <div class="nav-wrapper">
-            <div class = "input-field">
-              <input type="search" id="search" placeholder="Search by Movie Name">
-              <label class="label-icon" for="search"><i class="material-icons">movie</i></label>
-              <i class="material-icons">close</i>
-              
-            </div>
-          </div>  
-          </form>
-          </nav>
-        </div> 
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-
-  <!--Banner 3-->
-
-
-  <div class="parallax-container valign-wrapper">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <div class="row center">
-          <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
-        </div>
-      </div>
-    </div>
-    <div class="parallax"><img src="/background3.jpg" alt="Unsplashed background img 3"></div>
-  </div>
 
 
 <!--글쓰기 FAB-->
@@ -159,9 +71,6 @@ include "./header.php"
       
     </ul>
   </div>
-
-
-  
 
 <!-- Modal Structure (Posting)-->
 
@@ -217,8 +126,6 @@ include "./header.php"
                 </button>               
             </div>
         </div>
-
-
 
 
 

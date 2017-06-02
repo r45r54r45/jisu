@@ -55,7 +55,6 @@
     $('.chips').material_chip();
     $('.parallx').parallx();
 
-   
 
 
 
