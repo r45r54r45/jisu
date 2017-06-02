@@ -11,18 +11,15 @@ require_once("../api/api_function.php");
     <title>Movit</title>
 
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/materialize.min.css" media="screen, projection"/>
-    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link rel="stylesheet" type="text/css" href="/css/materialize.min.css" media="screen, projection"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
 <nav class="white" role="navigation">
     <div class="nav-wrapper container">
         <a id="logo-container" href="#" class="brand-logo">Logo</a>
 
-    <?php
-    //TODO: add wave
-    if (!isset($_SESSION['id'])){
-        ?>
+ 
         <ul class="right hide-on-med-and-down">
 
             <li>
@@ -43,21 +40,7 @@ require_once("../api/api_function.php");
         </ul>
         
 
-    <?php }
 
-    else { ?>
-
-        <ul class="right hide-on-med-and-down">
-            <li><a href="#">1</a></li>
-            <li><a href="#">logout</a></li>
-        </ul>
-        
-        <ul id="nav-mobile" class="side-nav">
-            <li><a href="#">logout</a></li>
-        </ul>
-
-
-    }
 
 
         <a href="#" data-activates = "nav-mobile" class="button-collapse"><i class = "material-icons">menu</i></a>

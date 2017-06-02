@@ -1,3 +1,4 @@
+
 <?php
 include "./header.php"
 ?>
@@ -18,7 +19,7 @@ include "./header.php"
 
       </div>
     </div>
-    <div class="parallax"><img src="background1.jpg" alt="Unsplashed background img 1"></div>
+    <div class="parallax"><img src="/background1.jpg" alt="Unsplashed background img 1"></div>
   </div>
 
 
@@ -67,7 +68,7 @@ include "./header.php"
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="background2.jpg" alt="Unsplashed background img 2"></div>
+    <div class="parallax"><img src="/background2.jpg" alt="Unsplashed background img 2"></div>
   </div>
 
   <div class="container">
@@ -93,9 +94,10 @@ include "./header.php"
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="background3.jpg" alt="Unsplashed background img 3"></div>
+    <div class="parallax"><img src="/background3.jpg" alt="Unsplashed background img 3"></div>
   </div>
 
 <?php
 include "./footer.php"
 ?>
+
