@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: woohyunkim
- * Date: 31/05/2017
- * Time: 11:44 PM
- */
+
 const INSERT_POST = "INSERT INTO post (user_id, lat, lng, location_name, movie_name, director_name ,title, content) 
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 const UPDATE_POST = "UPDATE post SET post_img_url = ? WHERE id = ?";
