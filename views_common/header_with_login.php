@@ -47,7 +47,7 @@ require_once("../api/api_function.php");
                 </a>
             </li>
             <li>
-                <a href="#">Logout</a>
+                <a href="#" id="logout_btn">Logout</a>
             </li>
         </ul>
 
@@ -124,6 +124,24 @@ $(document).ready(function(){
             url: "../api/login.php", 
             data : {"username": username,
                     "password": password},
+            dataType: 'json'
+        })
+        .done(function( json ) {
+            if(json.result == "fail"){
+                alert(json.error);
+            }
+            else{
+                location.reload();
+            }
+        })
+        .fail(function(request, error){
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        });
+    });
+    $("#logout_btn").on('click', function(){
+        $.ajax({
+            method: "POST",
+            url: "../api/logout.php", 
             dataType: 'json'
         })
         .done(function( json ) {
