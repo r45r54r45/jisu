@@ -119,6 +119,10 @@ $(document).ready(function(){
     $("#login_btn").on('click', function(){
         var username = $("#username").val();
         var password = $("#password").val();
+        if(username === "" || password === ""){
+            alert("빈칸을 다 채워주세요");
+            return;
+        }
         $.ajax({
             method: "POST",
             url: "../api/login.php", 

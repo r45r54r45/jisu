@@ -141,7 +141,11 @@ $(document).ready(function(){
     $("#sign_up_modal").modal();
     $("#signup_btn").on('click', function(){
         var username = $("#sign_username").val();
-        var password = $("#sign_password").val();       
+        var password = $("#sign_password").val();
+        if(username === "" || password === ""){
+            alert("빈칸을 다 채워주세요");
+            return;
+        }       
         $.ajax({
             method: "POST",
             url: "../api/sign_up.php", 
