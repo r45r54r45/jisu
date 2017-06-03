@@ -1,6 +1,6 @@
 
 <?php
-include "../views_common/header_with_login.php"
+include "../views_common/header_without_login.php"
 ?>
 <!--index banner 1: Map/Search Bar -->
 
@@ -17,7 +17,7 @@ include "../views_common/header_with_login.php"
           <form>
           <div class="nav-wrapper">
             <div class = "input-field">
-              <input type="search" id="search" placeholder="Yonsei University, Seoul, South Korea">
+              <input type="search" id="search2" placeholder="Yonsei University, Seoul, South Korea">
               <label class="label-icon" for="search"><i class="material-icons">search</i></label>
               <i class="material-icons">close</i>
               
@@ -30,7 +30,7 @@ include "../views_common/header_with_login.php"
 
       </div>
     </div>
-    <div class="parallax"><img src="/GoogleMap.jpg" alt="Map"></div>
+    <div id = "map" style = "height: 100%; width: 100%; position: absolute; top: 0px; left: 0px;z-index: -1"></div>
   </div>
 
 
@@ -240,4 +240,53 @@ include "../views_common/footer.php";
     $(".button-collapse").sideNav();
     $('.chips').material_chip();
     $('.parallx').parallx();
+</script>
+
+<!--google maps-->
+<script>
+  function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: -34.397, lng: 150.644},
+      zoom: 15
+    });
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+
+        map.setCenter(pos);
+        var marker = new google.maps.Marker({
+          position: pos,
+          map: map
+        });
+        var geocoder = new google.maps.Geocoder;
+        geocodeLatLng(geocoder, map, pos);
+      }, function() {
+        handleLocationError(true, infoWindow, map.getCenter());
+      });
+    } else {
+      // Browser doesn't support Geolocation
+      handleLocationError(false, infoWindow, map.getCenter());
+    }
+  }
+  // Find the address with coordinates.
+  function geocodeLatLng(geocoder, map, pos) {
+    geocoder.geocode({'location': pos}, function(results, status) {
+      if (status === 'OK') {
+        if (results[1]) {
+          $("#search2").attr("placeholder", results[1].formatted_address);
+        } else {
+          window.alert('No results found');
+        }
+      } else {
+        window.alert('Geocoder failed due to: ' + status);
+      }
+    });
+  }
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvf_j44qOsUly_8Y_8QVAcumWdsbJPRI8&callback=initMap">
 </script>
