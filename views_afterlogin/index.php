@@ -1,6 +1,6 @@
 
 <?php
-include "./header.php"
+include "../views_common/header_with_login.php"
 ?>
 <!--index banner 1: Map/Search Bar -->
 
@@ -223,6 +223,21 @@ include "./header.php"
 
 
 <?php
-include "./footer.php"
+include "../views_common/footer.php";
 ?>
 
+<!-- SCRIPTS -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="/js/materialize.min.js"></script>
+<script src="/js/init.js"></script>
+    <script>
+    $(document).ready(function(){
+    //init
+    $('.modal').modal();
+    $('.carousel').carousel();
+    $('.slider').slider({full_width: true, interval: 3000});
+    });
+    $(".button-collapse").sideNav();
+    $('.chips').material_chip();
+    $('.parallx').parallx();
+</script>

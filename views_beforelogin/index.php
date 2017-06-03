@@ -1,6 +1,6 @@
 
 <?php
-include "./header.php"
+include "../views_common/header_with_login.php"
 ?>
 <!--index banner -->
 
@@ -13,7 +13,7 @@ include "./header.php"
           <h5 class="header col s12 light">지도 영화 소셜 네트워크 어쩌구</h5>
         </div>
         <div class="row center">
-          <a href="#modal2" class="modal-trigger btn-large waves-effect waves-light teal lighten-1">Sign Up and Get Started</a>
+          <a href="#sign_up_modal" class="modal-trigger btn-large waves-effect waves-light teal lighten-1">Sign Up and Get Started</a>
         </div>
         <br><br>
 
@@ -22,20 +22,15 @@ include "./header.php"
     <div class="parallax"><img src="/background1.jpg" alt="Unsplashed background img 1"></div>
   </div>
 <!-- Modal Structure (Sign Up)-->
-
-        <div id="modal2" class="modal modal-fixed-footer">
+        <div id="sign_up_modal" class="modal modal-fixed-footer">
             <div class = "modal-content">
                 <h4>Sign Up</h4>
                 <div class="row">
                 <form class="col s12">
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="first_name" type="text" class="validate">
-                            <label for="first_name">First Name</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="last_name" type="text" class="validate">
-                            <label for="last_name">Last Name</label>
+                            <input id="username" type="text" class="validate">
+                            <label for="first_name">Username</label>
                         </div>
                     </div>
 
@@ -45,29 +40,12 @@ include "./header.php"
                             <label for="password">Password</label>
                         </div>
                     </div>
-      
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="email" type="email" class="validate">
-                            <label for="email">Email</label>
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col s12">
-                            This is an inline input field:
-                        <div class="input-field inline">
-                            <input id="email" type="email" class="validate">
-                            <label for="email" data-error="wrong" data-success="right">Email</label>
-                        </div>
-                        </div>
-                    </div>
                 </form>
                 </div>
             </div>
 
             <div class="modal-footer">
-                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Sign up</a>
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="signup_btn">Sign up</a>
             </div>
         </div>
 
@@ -151,6 +129,39 @@ include "./header.php"
 
 
 <?php
-include "./footer.php"
+include "../views_common/footer.php"
 ?>
 
+<!-- SCRIPTS -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="/js/materialize.min.js"></script>
+<script src="/js/init.js"></script>
+<script>
+$(document).ready(function(){
+    $("#sign_up_modal").modal();
+    $("#signup_btn").on('click', function(){
+        var username = $("#username").val();
+        var password = $("#password").val();
+        console.log(username+"b");
+        console.log(password+"a");
+        $.ajax({
+            method: "POST",
+            url: "../api/sign_up.php", 
+            data : {"username": username,
+                    "password": password},
+            dataType: 'json'
+        })
+        .done(function( json ) {
+            if(json.result == "fail"){
+                alert("회원가입 실패");
+            }
+            else{
+                location.reload();
+            }
+        })
+        .fail(function(request, error){
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        });
+    });
+});
+</script>
