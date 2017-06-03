@@ -21,7 +21,7 @@ function pdo_sql_connect(){
 function sign_up($username, $password){
     try{
         $conn = pdo_sql_connect();
-        $query = "INSERT INTO user (username, password) VALUES(?, ?)";
+        $query = "INSERT INTO user (username, password) VALUES(?, password(?))";
         $stmt = $conn->prepare($query);
         $result = $stmt->execute(array($username, $password));
         if($result){
@@ -29,18 +29,18 @@ function sign_up($username, $password){
             $stmt = $conn->prepare("SELECT id, username, profile_img_url FROM user WHERE id = ?");
             $result = $stmt->execute(array($id));
             if($result){
-                return $stmt->fetch(PDO::FETCH_ASSOC);
+                return json_encode($stmt->fetch(PDO::FETCH_ASSOC), JSON_UNESCAPED_UNICODE);
             }
             else{
-                return "Fail";
+                return json_encode(array("Fail", "회원가입 오류"), JSON_UNESCAPED_UNICODE);
             }
         }
         else{
-            return "Fail";
+            return json_encode(array("Fail", "Username 중복"), JSON_UNESCAPED_UNICODE);
         }
     }
     catch(PDOException $e){
-        return "Fail : ".$e;
+        return json_encode(array("Fail", $e), JSON_UNESCAPED_UNICODE);
     }
 }
 
@@ -52,14 +52,14 @@ function log_in($username, $password){
         $stmt = $conn->prepare($query);
         $result = $stmt->execute(array($username, $password));
         if($result){
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            return json_encode($stmt->fetch(PDO::FETCH_ASSOC), JSON_UNESCAPED_UNICODE);
         }
         else{
-            return "Fail";
+            return json_encode(array("Fail", "Username이나 Password가 잘못되었습니다"), JSON_UNESCAPED_UNICODE);
         }
     }
     catch(PDOException $e){
-        return "Fail : ".$e;
+        return json_encode(array("Fail", $e), JSON_UNESCAPED_UNICODE);
     }
 }
 
