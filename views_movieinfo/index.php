@@ -1,29 +1,53 @@
-
 <?php
-include "/views_common/header_without_login.php"
+include "../views_common/header_without_login.php";
+
+$results = json_decode(search_movie($_GET['moviename']), true);
+if($results['total'] === 1){
+  $result_item = $results['items'][0];
+}
+else{
+  if(!isset($_GET['directorname'])){
+    ?><script>history.go(-1);</script><?php
+  }
+  foreach($results['items'] as $item){
+    if(strcmp($item['director'], $_GET['directorname']) === 0){
+      $result_item = $item;
+      break;
+    }
+  }
+}
+if(!isset($result_item)){
+  exit();
+}
+else{
+  $html = file_get_html($result_item['link']);
+  foreach($html->find(".con_tx") as $text){
+    $result_item['story'] = $text->plaintext;
+    break;   
+  }
+  foreach($html->find('img[alt="STILLCUT"]') as $img){
+    $result_item['img'] = $img->src;
+    break;   
+  }
+}
 ?>
 <!--index banner : movie pic -->
 
   <div class="slider">
     <ul class="slides">
       <li>
-        <img src="/logan.jpg"> <!-- random image -->
+        <img src=<?php echo $result_item['img']; ?>> <!-- random image -->
         <div class="caption right-align">
-          <h3>Logan</h3>
-          <h5 class="light grey-text text-lighten-3">Summarized info</h5>
+          <h3><?php echo $result_item['title']; ?></h3>
+          <h5 class="light grey-text text-lighten-3"><?php echo $result_item['subtitle']; ?></h5>
         </div>
       </li>
 
       <li>
-        <img src="/logan.jpg"> <!-- random image -->
+        <img src=<?php echo $result_item['img']; ?>> <!-- random image -->
         <div class="caption right-align">
           <h3>Detailed Info</h3>
-          <h5 class="light grey-text text-lighten-3"> ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h5>
+          <h5 class="light grey-text text-lighten-3"> <?php echo $result_item['story']; ?></h5>
         </div>
       </li>
 
@@ -48,7 +72,6 @@ include "/views_common/header_without_login.php"
       <!--   Related / Carousel -->  
 
       <div class="row">
-        
           <div class="carousel">
             <a class="carousel-item" href="#one!"><img src="http://lorempixel.com/250/250/nature/1"></a>
             <a class="carousel-item" href="#two!"><img src="http://lorempixel.com/250/250/nature/2"></a>
@@ -69,18 +92,9 @@ include "/views_common/header_without_login.php"
 
 
 
-<!--글쓰기 FAB-->
-  <div class="fixed-action-btn">
-    <a class="btn-floating btn-large red">
-      <i class="large material-icons">mode_edit</i>
-    </a>
-    <ul>
-      <li><a class="btn-floating red"><i class="material-icons">share</i></a></li>
-      <li><a class="btn-floating yellow darken-1"><i class="material-icons">dashboard</i></a></li>
-      <li><a class="btn-floating green modal-trigger" href="#modal3"><i class="material-icons">library_add</i></a></li>
-      
-    </ul>
-  </div>
+<?php
+include_once ("../views_common/fixed_action_btn.php");
+?>
 
 <!-- Modal Structure (Posting)-->
 
@@ -144,8 +158,8 @@ include "../views_common/footer.php";
 ?>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script type="text/javascript" src="/js/materialize.min.js"></script>
-  <script src="/js/init.js"></script>
+  <script type="text/javascript" src="../js/materialize.min.js"></script>
+  <script src="../js/init.js"></script>
     <script>
       
     $(document).ready(function(){

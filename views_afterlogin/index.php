@@ -228,8 +228,8 @@ include "../views_common/footer.php";
 
 <!-- SCRIPTS -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="/js/materialize.min.js"></script>
-<script src="/js/init.js"></script>
+<script type="text/javascript" src="../js/materialize.min.js"></script>
+<script src="../js/init.js"></script>
     <script>
     $(document).ready(function(){
     //init

@@ -1,10 +1,11 @@
 ﻿<?php
+require_once("simple_html_dom.php");
 
 function search_movie($movie_name){
     $client_id = "vfB2ILfkGdh1vk2DgPG5";
     $client_secret = "OTfkB6_Z2n";
     $encText = urlencode($movie_name);
-    $url = "https://openapi.naver.com/v1/search/movie.json?query=".$encText; // json 결과
+    $url = "https://openapi.naver.com/v1/search/movie.json?display=100&query=".$encText; // json 결과
     $is_post = false;
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
