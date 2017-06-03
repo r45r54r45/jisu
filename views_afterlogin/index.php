@@ -30,7 +30,7 @@ include "../views_common/header_without_login.php"
 
       </div>
     </div>
-    <div id = "map" style = "height: 100%; width: 100%; position: absolute; top: 0px; left: 0px;z-index: -1"></div>
+    <div id = "map" style = "height: 100%; width: 100%; position: absolute; top: 0px; left: 0px;"></div>
   </div>
 
 
@@ -265,11 +265,18 @@ include "../views_common/footer.php";
         var geocoder = new google.maps.Geocoder;
         geocodeLatLng(geocoder, map, pos);
       }, function() {
-        handleLocationError(true, infoWindow, map.getCenter());
+        handleLocationError(true, map.getCenter());
       });
     } else {
       // Browser doesn't support Geolocation
-      handleLocationError(false, infoWindow, map.getCenter());
+      handleLocationError(false, map.getCenter());
+    }
+  }
+  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    if(browserHasGeolocation){
+      window.alert('Error on geolocation');
+    }else{
+      window.alert('The browser doesn\'t support geolocaton service. Please use another browser.');
     }
   }
   // Find the address with coordinates.

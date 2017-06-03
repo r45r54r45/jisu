@@ -17,7 +17,7 @@ include "../views_common/header_without_login.php"
 
       </div>
     </div>
-    <div class="parallax"><img src="/GoogleMap.jpg" alt="Map"></div>
+    <div id = "map" style = "height: 100%; width: 100%; position: absolute; top: 0px; left: 0px;"></div>
   </div>
 
 
@@ -143,6 +143,61 @@ include "../views_common/footer.php"
     });
     $(".button-collapse").sideNav();
     $('.chips').material_chip();
-    $('.parallx').parallx();
+    $('.parallax').parallax();
 </script>
 
+<!--google maps-->
+<script>
+  function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: -34.397, lng: 150.644},
+      zoom: 15
+    });
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+
+        map.setCenter(pos);
+        var marker = new google.maps.Marker({
+          position: pos,
+          map: map
+        });
+        var geocoder = new google.maps.Geocoder;
+        geocodeLatLng(geocoder, map, pos);
+      }, function() {
+        handleLocationError(true, map.getCenter());
+      });
+    } else {
+      // Browser doesn't support Geolocation
+      handleLocationError(false, map.getCenter());
+    }
+  }
+  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    if(browserHasGeolocation){
+      window.alert('Error on geolocation');
+    }else{
+      window.alert('The browser doesn\'t support geolocaton service. Please use another browser.');
+    }
+  }
+  // Find the address with coordinates.
+  function geocodeLatLng(geocoder, map, pos) {
+    geocoder.geocode({'location': pos}, function(results, status) {
+      if (status === 'OK') {
+        if (results[1]) {
+          $("#search2").attr("placeholder", results[1].formatted_address);
+        } else {
+          window.alert('No results found');
+        }
+      } else {
+        window.alert('Geocoder failed due to: ' + status);
+      }
+    });
+  }
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvf_j44qOsUly_8Y_8QVAcumWdsbJPRI8&callback=initMap">
+</script>
