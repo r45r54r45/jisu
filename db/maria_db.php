@@ -5,7 +5,7 @@ require_once "query.php";
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-$root_directory = "http://45.32.109.86";
+$root_directory = "https://movit-iz000.c9users.io";
 
 function pdo_sql_connect(){
     $movit_host = 'movit.crwpu2cl615x.ap-northeast-2.rds.amazonaws.com';
@@ -16,52 +16,6 @@ function pdo_sql_connect(){
 	return $conn;
 }
 
-//회원가입하는 함수
-
-function sign_up($username, $password){
-    try{
-        $conn = pdo_sql_connect();
-        $query = "INSERT INTO user (username, password) VALUES(?, ?)";
-        $stmt = $conn->prepare($query);
-        $result = $stmt->execute(array($username, $password));
-        if($result){
-            $id = $conn->lastInsertId();
-            $stmt = $conn->prepare("SELECT id, username, profile_img_url FROM user WHERE id = ?");
-            $result = $stmt->execute(array($id));
-            if($result){
-                return $stmt->fetch(PDO::FETCH_ASSOC);
-            }
-            else{
-                return "Fail";
-            }
-        }
-        else{
-            return "Fail";
-        }
-    }
-    catch(PDOException $e){
-        return "Fail : ".$e;
-    }
-}
-
-//로그인하는 함수
-function log_in($username, $password){
-    try{
-        $conn = pdo_sql_connect();
-        $query = "SELECT id, username, profile_img_url FROM user WHERE username = ? and password = password(?)";
-        $stmt = $conn->prepare($query);
-        $result = $stmt->execute(array($username, $password));
-        if($result){
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        }
-        else{
-            return "Fail";
-        }
-    }
-    catch(PDOException $e){
-        return "Fail : ".$e;
-    }
-}
 
 //포스트 만드는 함수
 function make_post($user_id, $lat, $lng, $location_name, $movie_name, $director_name, $title, $content){

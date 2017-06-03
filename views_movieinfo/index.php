@@ -1,6 +1,6 @@
 
 <?php
-include "/views_common/header_without_login.php"
+include "./header.php"
 ?>
 <!--index banner : movie pic -->
 
@@ -140,33 +140,6 @@ include "/views_common/header_without_login.php"
 
 
 <?php
-include "../views_common/footer.php";
+include "./footer.php"
 ?>
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script type="text/javascript" src="/js/materialize.min.js"></script>
-  <script src="/js/init.js"></script>
-    <script>
-      
-    $(document).ready(function(){
-    //init
-
-
-    $('.modal').modal();
-    $('.carousel').carousel();
-    $('.slider').slider({full_width: true, interval: 3000});
-    });
-
-
-
-    $(".button-collapse").sideNav();
-    $('.chips').material_chip();
-    $('.parallx').parallx();
-
-
-
-
-
-
-
-    </script>

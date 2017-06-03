@@ -1,6 +1,6 @@
 
 <?php
-include "/views_common/header_without_login.php"
+include "./header.php"
 ?>
 
 <!--index banner 1: Map/Search Bar -->
@@ -130,7 +130,7 @@ include "/views_common/header_without_login.php"
 
 
 <?php
-include "../views_common/footer.php"
+include "./footer.php"
 ?>
 <script type="text/javascript" src="/js/materialize.min.js"></script>
 <script src="/js/init.js"></script>
