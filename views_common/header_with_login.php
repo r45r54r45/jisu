@@ -128,7 +128,7 @@ $(document).ready(function(){
         })
         .done(function( json ) {
             if(json.result == "fail"){
-                alert(json.error);
+                alert("로그인 실패");
             }
             else{
                 location.reload();

@@ -29,14 +29,14 @@ include "../views_common/header_with_login.php"
                 <form class="col s12">
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="sign_username" type="text" class="validate">
+                            <input id="username" type="text" class="validate">
                             <label for="first_name">Username</label>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="sign_password" type="password" class="validate">
+                            <input id="password" type="password" class="validate">
                             <label for="password">Password</label>
                         </div>
                     </div>
@@ -140,8 +140,10 @@ include "../views_common/footer.php"
 $(document).ready(function(){
     $("#sign_up_modal").modal();
     $("#signup_btn").on('click', function(){
-        var username = $("#sign_username").val();
-        var password = $("#sign_password").val();       
+        var username = $("#username").val();
+        var password = $("#password").val();
+        console.log(username+"b");
+        console.log(password+"a");
         $.ajax({
             method: "POST",
             url: "../api/sign_up.php", 
@@ -151,11 +153,10 @@ $(document).ready(function(){
         })
         .done(function( json ) {
             if(json.result == "fail"){
-                alert(json.error);
+                alert("회원가입 실패");
             }
             else{
-              console.log("success");
-              location.reload();
+                location.reload();
             }
         })
         .fail(function(request, error){
