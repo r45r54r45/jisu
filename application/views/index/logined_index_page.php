@@ -1,9 +1,7 @@
 <!--index banner 1: Map/Search Bar -->
-<div id="index-banner" class="parallax-container">
-    <div class="section no-pad-bot">
+<div id="index-banner" class="parallax-container" style="overflow: initial">
+    <div class="section no-pad-bot"  style="z-index:1000; position: absolute">
         <div class="container" style="margin-top: 80px">
-
-
             <div class="row center">
                 <h5 class="header col s12 light" style="color: black">Now you are at</h5>
             </div>
@@ -12,16 +10,26 @@
                     <form>
                         <div class="nav-wrapper">
                             <div class="input-field">
-                                <input type="search" id="search2" placeholder="Yonsei University, Seoul, South Korea">
+                                <input type="search" id="search2" placeholder="">
                                 <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                                 <i class="material-icons">close</i>
-
                             </div>
                         </div>
                     </form>
                 </nav>
             </div>
-            <br><br>
+            <div class="row center" id="search-area" style=" width: 70%;margin: auto; height: 600px; display: none; background: white; border: 1px solid black;">
+                <div style="display: flex; flex-direction: column; width: 100%; height: 100%;">
+                    <div style="flex-basis:300px; height: 300px; border: 1px solid black; line-height: initial;" id="map-view" >
+                        <div id="map2" style="height: 300px; width: 100%; "></div>
+                    </div>
+                    <div style="flex-basis:300px; color: black; border: 1px solid black; line-height: initial;" id="search-view">
+                        <input type="text" id="address-input"/>
+                        <button type="button" onclick="codeAddress($('#address-input').val())">검색</button>
+                        <button type="button" onclick="goToLocation()">이 장소로 가기</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div id="map" style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px;"></div>
@@ -34,12 +42,8 @@
         <div class="row center">
             <h5 class="header col s12 light" style="color: black">Near Posts</h5>
         </div>
-
-
         <!--   Near Posts / Carousel   -->
-
         <div class="row">
-
             <div class="carousel">
                 <a class="carousel-item" href="#one!"><img src="http://lorempixel.com/250/250/nature/1"></a>
                 <a class="carousel-item" href="#two!"><img src="http://lorempixel.com/250/250/nature/2"></a>
@@ -197,11 +201,39 @@
 
 <!--google maps-->
 <script>
+    var map;
+    var map2;
+    var selectedPoint;
+    $.urlParam = function(name){
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+        if (results==null){
+            return null;
+        }
+        else{
+            return decodeURI(results[1]) || 0;
+        }
+    }
+    function initMap2(){
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                if($.urlParam('lat') && $.urlParam('lng')){
+                    pos={
+                        lat: parseFloat($.urlParam('lat')),
+                        lng: parseFloat($.urlParam('lng'))
+                    }
+                }
+                map2= new google.maps.Map(document.getElementById('map2'), {
+                    center: pos,
+                    zoom: 15
+                });
+            });
+        }
+    }
     function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: -34.397, lng: 150.644},
-            zoom: 15
-        });
         // Try HTML5 geolocation.
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
@@ -209,8 +241,16 @@
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
                 };
-
-                map.setCenter(pos);
+                if($.urlParam('lat') && $.urlParam('lng')){
+                    pos={
+                        lat: parseFloat($.urlParam('lat')),
+                        lng: parseFloat($.urlParam('lng'))
+                    }
+                }
+                map= new google.maps.Map(document.getElementById('map'), {
+                    center: pos,
+                    zoom: 15
+                });
                 var marker = new google.maps.Marker({
                     position: pos,
                     map: map
@@ -246,6 +286,36 @@
             }
         });
     }
+    function codeAddress(address) {
+        console.log(address)
+        var geocoder = new google.maps.Geocoder;
+        geocoder.geocode( { 'address': address}, function(results, status) {
+            if (status == 'OK') {
+                selectedPoint = results[0].geometry.location;
+                map2.setCenter(results[0].geometry.location);
+                console.log(results[0].geometry.location)
+                var marker = new google.maps.Marker({
+                    map: map2,
+                    position: results[0].geometry.location
+                });
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
+    function goToLocation(){
+        if(selectedPoint){
+            location.href="/?lat="+selectedPoint.lat()+"&lng="+selectedPoint.lng();
+        }
+    }
+    $(function(){
+        $('#search2').focus(function(){
+            initMap2();
+            $('#search-area').show();
+            $('#search2').blur();
+        })
+    })
+
 </script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvf_j44qOsUly_8Y_8QVAcumWdsbJPRI8&callback=initMap">

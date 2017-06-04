@@ -24,7 +24,7 @@ if ($logined) {
                     </a>
                 </li>
                 <li>
-                    <a href="#">Logout</a>
+                    <a href="/api/logout">Logout</a>
                 </li>
             </ul>
             <!-- Mobile Side Nav-->
