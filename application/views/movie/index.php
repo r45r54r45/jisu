@@ -3,24 +3,23 @@
 <div class="slider">
     <ul class="slides">
         <li>
-            <img src="/static/image/logan.jpg"> <!-- random image -->
+            <img src="<?php echo $movie['image']?>"> <!-- random image -->
             <div class="caption right-align">
-                <h3>Logan</h3>
-                <h5 class="light grey-text text-lighten-3">Summarized info</h5>
+                <h3><?php echo $movie['title']?></h3>
+                <h5 class="light grey-text text-lighten-3"><?php echo $movie['subtitle']?></h5>
             </div>
         </li>
 
         <li>
-            <img src="/static/image/logan.jpg"> <!-- random image -->
+            <img src="<?php echo $movie['image']?>"/>
             <div class="caption right-align">
                 <h3>Detailed Info</h3>
-                <h5 class="light grey-text text-lighten-3"> ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h5>
+                <h5 class="light grey-text text-lighten-3">
+                    <p>개봉 년: <?php echo $movie['pubDate']?></p>
+                    <p>감독: <?php echo $movie['director']?></p>
+                    <p>배우: <?php echo $movie['actor']?></p>
+                    <p>평점: <?php echo $movie['userRating']?></p>
+                </h5>
             </div>
         </li>
 

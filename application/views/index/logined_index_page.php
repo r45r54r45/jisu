@@ -102,7 +102,6 @@
 
         <div class="row">
             <div class="col s12 center">
-
                 <h5 class="header col s12 light" style="color: black">Didn't you find the movie you want among
                     above?</h5>
             </div>
