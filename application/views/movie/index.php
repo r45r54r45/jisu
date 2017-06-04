@@ -3,22 +3,22 @@
 <div class="slider">
     <ul class="slides">
         <li>
-            <img src="<?php echo $movie['image']?>"> <!-- random image -->
+            <img src="<?php echo $movie['image'] ?>"> <!-- random image -->
             <div class="caption right-align">
-                <h3><?php echo $movie['title']?></h3>
-                <h5 class="light grey-text text-lighten-3"><?php echo $movie['subtitle']?></h5>
+                <h3><?php echo $movie['title'] ?></h3>
+                <h5 class="light grey-text text-lighten-3"><?php echo $movie['subtitle'] ?></h5>
             </div>
         </li>
 
         <li>
-            <img src="<?php echo $movie['image']?>"/>
+            <img src="<?php echo $movie['image'] ?>"/>
             <div class="caption right-align">
                 <h3>Detailed Info</h3>
                 <h5 class="light grey-text text-lighten-3">
-                    <p>개봉 년: <?php echo $movie['pubDate']?></p>
-                    <p>감독: <?php echo $movie['director']?></p>
-                    <p>배우: <?php echo $movie['actor']?></p>
-                    <p>평점: <?php echo $movie['userRating']?></p>
+                    <p>개봉 년: <?php echo $movie['pubDate'] ?></p>
+                    <p>감독: <?php echo $movie['director'] ?></p>
+                    <p>배우: <?php echo $movie['actor'] ?></p>
+                    <p>평점: <?php echo $movie['userRating'] ?></p>
                 </h5>
             </div>
         </li>
@@ -34,18 +34,17 @@
         <div class="row center">
             <h5 class="header col s12 light" style="color: black">Related Posts</h5>
         </div>
-
-
         <!--   Related / Carousel -->
-
         <div class="row">
 
             <div class="carousel">
-                <a class="carousel-item" href="#one!"><img src="http://lorempixel.com/250/250/nature/1"></a>
-                <a class="carousel-item" href="#two!"><img src="http://lorempixel.com/250/250/nature/2"></a>
-                <a class="carousel-item" href="#three!"><img src="http://lorempixel.com/250/250/nature/3"></a>
-                <a class="carousel-item" href="#four!"><img src="http://lorempixel.com/250/250/nature/4"></a>
-                <a class="carousel-item" href="#five!"><img src="http://lorempixel.com/250/250/nature/5"></a>
+                <?php
+                foreach ($posts as $post) {
+                    ?>
+                    <a class="carousel-item" href="/post"><img src="<?php echo $post['post_img_url'] ?>"></a>
+                    <?php
+                }
+                ?>
             </div>
         </div>
 
