@@ -15,6 +15,7 @@ class Post_model extends CI_Model
     }
     public function getPostsByLoc($lat, $lng)
     {
+        $this->db->join('movie', 'movie.id = post.movie_id');
         return $this->db->get_where('post', 'distance('.$lat.', '.$lng.', post.lat, post.lng) < 100')->result_array();
     }
     public function getPost($post_id)

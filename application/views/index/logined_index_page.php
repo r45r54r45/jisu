@@ -63,34 +63,16 @@
 
 <div class="slider">
     <ul class="slides">
-        <li>
-            <img src="http://lorempixel.com/580/250/nature/1"> <!-- random image -->
-            <div class="caption center-align">
-                <h3>Movies related to your location</h3>
-                <h5 class="light grey-text text-lighten-3">Toy Story</h5>
-            </div>
-        </li>
-        <li>
-            <img src="http://lorempixel.com/580/250/nature/2"> <!-- random image -->
-            <div class="caption left-align">
-                <h3>Movies related to your location</h3>
-                <h5 class="light grey-text text-lighten-3">Snow White</h5>
-            </div>
-        </li>
-        <li>
-            <img src="http://lorempixel.com/580/250/nature/3"> <!-- random image -->
-            <div class="caption right-align">
-                <h3>Movies related to your location</h3>
-                <h5 class="light grey-text text-lighten-3">Beauty and the Beast</h5>
-            </div>
-        </li>
-        <li>
-            <img src="http://lorempixel.com/580/250/nature/4"> <!-- random image -->
-            <div class="caption center-align">
-                <h3>This is our big Tagline!</h3>
-                <h5 class="light grey-text text-lighten-3">Mulan</h5>
-            </div>
-        </li>
+        <?php foreach ($posts as $post) { ?>
+            <li>
+                <img src="<?php echo $post['image']?>"> <!-- random image -->
+                <div class="caption center-align">
+                    <h3><?php echo $post['title']?></h3>
+                    <h5 class="light grey-text text-lighten-3"><?php echo $post['subtitle']?></h5>
+                </div>
+            </li>
+        <?php } ?>
+
     </ul>
 </div>
 

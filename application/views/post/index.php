@@ -82,28 +82,25 @@
                         </li>
                     <?php } ?>
                     <!-- Comment Form-->
-
-                    <li class="collection-item avatar">
-                        <i class="material-icons circle red">perm_identity</i>
-                        <div class="title" style="margin-top: 10px"><?php echo $userData->username ?></div>
-                        <form class="col s12" action="/post/reply/<?php echo $post['post_id'] ?>" method="post">
-                            <div class="row">
-                                <div class="input-field">
-                                    <i class="material-icons prefix">comment</i>
-                                    <textarea id="icon_prefix2" class="materialize-textarea" name="content"></textarea>
-                                    <label for="icon_prefix2">comment</label>
+                    <?php if ($logined) { ?>
+                        <li class="collection-item avatar">
+                            <i class="material-icons circle red">perm_identity</i>
+                            <div class="title" style="margin-top: 10px"><?php echo $userData->username ?></div>
+                            <form class="col s12" action="/post/reply/<?php echo $post['post_id'] ?>" method="post">
+                                <div class="row">
+                                    <div class="input-field">
+                                        <i class="material-icons prefix">comment</i>
+                                        <textarea id="icon_prefix2" class="materialize-textarea"
+                                                  name="content"></textarea>
+                                        <label for="icon_prefix2">comment</label>
+                                    </div>
                                 </div>
-                            </div>
-                            <button>제출</button>
-                        </form>
-
-                    </li>
-
+                                <button>제출</button>
+                            </form>
+                        </li>
+                    <?php } ?>
                 </ul>
             </div>
-
         </div>
-
     </div>
-
 </div>
