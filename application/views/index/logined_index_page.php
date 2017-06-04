@@ -1,3 +1,7 @@
+<div id="mask" style="z-index:9999; display: block; background: white; position: fixed; left:0; top:0; height: 100vh; width: 100vw;">
+    <h1>현재 위치를 체크 중입니다</h1>
+</div>
+
 <!--index banner 1: Map/Search Bar -->
 <div id="index-banner" class="parallax-container" style="overflow: initial">
     <div class="section no-pad-bot" style="z-index:1000; position: absolute">
@@ -168,7 +172,11 @@
             return decodeURI(results[1]) || 0;
         }
     }
-
+    if(!($.urlParam('lat') && $.urlParam('lng'))){
+        $("#mask").show();
+    }else{
+        $("#mask").hide();
+    }
     function initMap2() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
