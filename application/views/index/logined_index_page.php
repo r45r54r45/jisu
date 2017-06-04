@@ -28,7 +28,7 @@
                     <div style="flex-basis:300px; color: black; border: 1px solid black; line-height: initial;"
                          id="search-view">
                         <input type="text" id="address-input"/>
-                        <button type="button" onclick="codeAddress($('#address-input').val())">검색</button>
+                        <button type="button" onclick="makeLatLng($('#address-input').val())">검색</button>
                         <button type="button" onclick="goToLocation()">이 장소로 가기</button>
                     </div>
                 </div>
@@ -37,6 +37,18 @@
     </div>
     <div id="map" style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px;"></div>
 </div>
+<script>
+    function makeLatLng(address) {
+        codeAddress(address, function (candidates, coord) {
+            selectedPoint = coord;
+            map2.setCenter(selectedPoint);
+            var marker = new google.maps.Marker({
+                map: map2,
+                position: selectedPoint
+            });
+        })
+    }
+</script>
 
 <!-- Container 1: Near Posts -->
 
@@ -47,14 +59,14 @@
         </div>
         <!--   Near Posts / Carousel   -->
         <div class="row">
-            <?php if(sizeof($posts) !== 0) { ?>
+            <?php if (sizeof($posts) !== 0) { ?>
                 <div class="carousel">
                     <?php foreach ($posts as $post) { ?>
                         <a class="carousel-item" href="/post/watch/<?php echo $post['post_id'] ?>"><img
                                     src="<?php echo $post['post_img_url'] ?>"></a>
                     <?php } ?>
                 </div>
-            <?php }else{ ?>
+            <?php } else { ?>
                 <h1> NO POSTS YET</h1>
             <?php } ?>
         </div>
@@ -96,19 +108,17 @@
         </div>
         <div class="row" style="width: 70%; margin: auto">
             <nav>
-                <form id="movie-search" onsubmit="">
-                    <div class="nav-wrapper">
-                        <div class="input-field">
-                            <input type="search" id="search" placeholder="Search by Movie Name">
-                            <label class="label-icon" for="search"><i class="material-icons">movie</i></label>
-                            <i class="material-icons">close</i>
-                        </div>
+                <div class="nav-wrapper">
+                    <div class="input-field">
+                        <input type="search" id="search" placeholder="Search by Movie Name" onkeydown="searchMovie('search', app4);">
+                        <label class="label-icon" for="search"><i class="material-icons">movie</i></label>
+                        <i class="material-icons">close</i>
                     </div>
-                </form>
+                </div>
             </nav>
             <ul>
                 <li v-for="item in list">
-                   <button v-on:click="goToMovieDetail(item.id)">{{ item.title }}</button>
+                    <button v-on:click="goToMovieDetail(item.id)">{{ item.title }}</button>
                 </li>
             </ul>
         </div>
@@ -122,30 +132,10 @@
         },
         methods: {
             goToMovieDetail: function (movieId) {
-                location.href='/movie/watch/'+movieId;
+                location.href = '/movie/watch/' + movieId;
             }
         }
     })
-</script>
-<script>
-    $(document).ready(function () {
-        $('#movie-search').on('submit', function (e) {
-            // validation code here
-            e.preventDefault();
-            console.log($('#search').val())
-            fetch('/movie/find/' + $('#search').val(), {
-                method: 'get'
-            })
-                .then(function (result) {
-                    return result.json()
-                })
-                .then(function (result) {
-                    console.log(result)
-                    app4.list = result
-                })
-            return false;
-        });
-    });
 </script>
 
 
@@ -163,63 +153,6 @@
     <div class="parallax"><img src="/static/image/background3.jpg" alt="Unsplashed background img 3"></div>
 </div>
 
-
-<!--글쓰기 FAB-->
-<div class="fixed-action-btn">
-    <a class="btn-floating btn-large red">
-        <i class="large material-icons">mode_edit</i>
-    </a>
-    <ul>
-        <li><a class="btn-floating red"><i class="material-icons">share</i></a></li>
-        <li><a class="btn-floating yellow darken-1"><i class="material-icons">dashboard</i></a></li>
-        <li><a class="btn-floating green modal-trigger" href="#modal3"><i class="material-icons">library_add</i></a>
-        </li>
-
-    </ul>
-</div>
-
-
-<!-- Modal Structure (Posting)-->
-
-<div id="modal3" class="modal modal-fixed-footer">
-    <div class="modal-content">
-        <h4>Posting</h4>
-        <div class="row">
-            <form class="col s12">
-
-                <div class="file-field input-field">
-                    <div class="btn">
-                        <span>File</span>
-                        <input type="file">
-                    </div>
-                    <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">mode_edit</i>
-                        <textarea id="textarea" class="materialize-textarea"></textarea>
-                        <label for="textarea">Write Text</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">label</i>
-                        <div id="tags" class="chips"></div>
-                        <label for="tags">Write tags and hit enter</label>
-
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-            <i class="material-icons right">send</i>
-        </button>
-    </div>
-</div>
 
 <!--google maps-->
 <script>
@@ -320,23 +253,7 @@
             }
         });
     }
-    function codeAddress(address) {
-        console.log(address)
-        var geocoder = new google.maps.Geocoder;
-        geocoder.geocode({'address': address}, function (results, status) {
-            if (status == 'OK') {
-                selectedPoint = results[0].geometry.location;
-                map2.setCenter(results[0].geometry.location);
-                console.log(results[0].geometry.location)
-                var marker = new google.maps.Marker({
-                    map: map2,
-                    position: results[0].geometry.location
-                });
-            } else {
-                alert('Geocode was not successful for the following reason: ' + status);
-            }
-        });
-    }
+
     function goToLocation() {
         if (selectedPoint) {
             location.href = "/?lat=" + selectedPoint.lat() + "&lng=" + selectedPoint.lng();
@@ -350,7 +267,4 @@
         })
     })
 
-</script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvf_j44qOsUly_8Y_8QVAcumWdsbJPRI8&callback=initMap">
 </script>

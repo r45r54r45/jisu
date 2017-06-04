@@ -37,6 +37,7 @@ class MY_Loader extends CI_Loader
             }
 
         }
+        $this->view('common/addPost', $vars, $return);
         if ($return) {
             $content .= $this->view('common/footer', $vars, $return);
             return $content;

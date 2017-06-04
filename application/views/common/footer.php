@@ -40,6 +40,9 @@ if ($logined) {
     <!-- SCRIPTS -->
     <script type="text/javascript" src="/static/js/materialize.min.js"></script>
     <script src="/static/js/init.js"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvf_j44qOsUly_8Y_8QVAcumWdsbJPRI8&callback=initMap">
+    </script>
     <script>
         $(document).ready(function () {
             //init

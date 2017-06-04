@@ -37,7 +37,6 @@
         </div>
         <!--   Related / Carousel -->
         <div class="row">
-
             <?php if(sizeof($posts) !== 0) { ?>
             <div class="carousel">
                 <?php

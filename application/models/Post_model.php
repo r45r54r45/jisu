@@ -26,5 +26,17 @@ class Post_model extends CI_Model
         $this->db->join('movie', 'movie.id = post.movie_id');
         return $this->db->get_where('post', ['post.id' => $post_id])->result_array()[0];
     }
-
+    public function addPost($user_id, $post_img_url, $lat, $lng, $location_name, $movie_id, $title, $content){
+        $this->db->insert('post', [
+            'user_id' => $user_id,
+            'content' => $content,
+            'movie_id' => $movie_id,
+            'post_img_url' => $post_img_url,
+            'lat' => $lat,
+            'lng'=>$lng,
+            'location_name' => $location_name,
+            'title' => $title
+        ]);
+        return $this->db->insert_id();
+    }
 }
