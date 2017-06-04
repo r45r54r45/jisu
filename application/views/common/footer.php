@@ -48,7 +48,7 @@ if ($logined) {
             $('.slider').slider({full_width: true, interval: 3000});
             $(".button-collapse").sideNav();
             $('.chips').material_chip();
-            $('.parallx').parallax();
+            $('.parallax').parallax();
         });
     </script>
     </body>

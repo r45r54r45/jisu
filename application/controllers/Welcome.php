@@ -17,7 +17,6 @@ class Welcome extends CI_Controller
         }else{
             $data['posts']= array();
         }
-        
         $this->load->template($this->session, $this->session->logined ? 'index/logined_index_page' : 'index/not_logined_index_page',$data);
     }
 }

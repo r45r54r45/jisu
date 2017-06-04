@@ -47,11 +47,16 @@
         </div>
         <!--   Near Posts / Carousel   -->
         <div class="row">
-            <div class="carousel">
-                <?php foreach ($posts as $post) { ?>
-                    <a class="carousel-item" href="/post/watch/<?php echo $post['id']?>"><img src="<?php echo $post['post_img_url']?>"></a>
-                <?php } ?>
-            </div>
+            <?php if(sizeof($posts) !== 0) { ?>
+                <div class="carousel">
+                    <?php foreach ($posts as $post) { ?>
+                        <a class="carousel-item" href="/post/watch/<?php echo $post['post_id'] ?>"><img
+                                    src="<?php echo $post['post_img_url'] ?>"></a>
+                    <?php } ?>
+                </div>
+            <?php }else{ ?>
+                <h1> NO POSTS YET</h1>
+            <?php } ?>
         </div>
 
     </div>
@@ -65,10 +70,10 @@
     <ul class="slides">
         <?php foreach ($posts as $post) { ?>
             <li>
-                <img src="<?php echo $post['image']?>"> <!-- random image -->
+                <img src="<?php echo $post['image'] ?>"> <!-- random image -->
                 <div class="caption center-align">
-                    <h3><?php echo $post['title']?></h3>
-                    <h5 class="light grey-text text-lighten-3"><?php echo $post['subtitle']?></h5>
+                    <h3><?php echo $post['title'] ?></h3>
+                    <h5 class="light grey-text text-lighten-3"><?php echo $post['subtitle'] ?></h5>
                 </div>
             </li>
         <?php } ?>
@@ -80,7 +85,7 @@
 <!-- movie search -->
 
 
-<div class="container" style="padding-top: 100px; padding-bottom: 150px">
+<div class="container" style="padding-top: 100px; padding-bottom: 150px" id="search-movie">
     <div class="section">
 
         <div class="row">
@@ -89,23 +94,59 @@
                     above?</h5>
             </div>
         </div>
-
         <div class="row" style="width: 70%; margin: auto">
             <nav>
-                <form>
+                <form id="movie-search" onsubmit="">
                     <div class="nav-wrapper">
                         <div class="input-field">
                             <input type="search" id="search" placeholder="Search by Movie Name">
                             <label class="label-icon" for="search"><i class="material-icons">movie</i></label>
                             <i class="material-icons">close</i>
-
                         </div>
                     </div>
                 </form>
             </nav>
+            <ul>
+                <li v-for="item in list">
+                   <button v-on:click="goToMovieDetail(item.id)">{{ item.title }}</button>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
+<script>
+    var app4 = new Vue({
+        el: '#search-movie',
+        data: {
+            list: []
+        },
+        methods: {
+            goToMovieDetail: function (movieId) {
+                location.href='/movie/watch/'+movieId;
+            }
+        }
+    })
+</script>
+<script>
+    $(document).ready(function () {
+        $('#movie-search').on('submit', function (e) {
+            // validation code here
+            e.preventDefault();
+            console.log($('#search').val())
+            fetch('/movie/find/' + $('#search').val(), {
+                method: 'get'
+            })
+                .then(function (result) {
+                    return result.json()
+                })
+                .then(function (result) {
+                    console.log(result)
+                    app4.list = result
+                })
+            return false;
+        });
+    });
+</script>
 
 
 <!--Banner 3-->

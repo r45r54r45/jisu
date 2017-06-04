@@ -16,10 +16,9 @@ class Movie extends CI_Controller
 
     }
     public function find($movie_name){
-        var_dump(urldecode($movie_name));
         $search_result = $this->movie_model->getMovies(urldecode($movie_name));
-        var_dump($search_result);
-        $this->load->template($this->session, 'movie/index');
+        header('Content-Type: application/json');
+        echo json_encode($search_result);
     }
 
     public function watch($movie_id){

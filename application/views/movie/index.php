@@ -29,6 +29,7 @@
 <!-- Container : Related Posts -->
 
 
+
 <div class="container">
     <div class="section">
         <div class="row center">
@@ -37,6 +38,7 @@
         <!--   Related / Carousel -->
         <div class="row">
 
+            <?php if(sizeof($posts) !== 0) { ?>
             <div class="carousel">
                 <?php
                 foreach ($posts as $post) {
@@ -46,10 +48,13 @@
                 }
                 ?>
             </div>
+            <?php }else{ ?>
+                <h1> NO POSTS YET</h1>
+            <?php } ?>
         </div>
-
     </div>
 </div>
+
 
 
 <!--글쓰기 FAB-->

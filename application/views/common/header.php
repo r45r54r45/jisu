@@ -11,6 +11,7 @@ if ($logined) {
         <link rel="stylesheet" type="text/css" href="/static/css/materialize.min.css" media="screen, projection"/>
         <link href="/static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://unpkg.com/vue"></script>
     </head>
     <body>
     <nav class="white" role="navigation">
