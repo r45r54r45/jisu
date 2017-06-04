@@ -15,12 +15,12 @@ if ($logined) {
     <body>
     <nav class="white" role="navigation">
         <div class="nav-wrapper container">
-            <a id="logo-container" href="#" class="brand-logo">Logo</a>
+            <a id="logo-container" href="/" class="brand-logo">Logo</a>
             <ul class="right hide-on-med-and-down">
                 <li>
 
                     <a class="chip" href="">
-                        <img src="/static/image/background1.jpg" alt="profile">Jane Doe
+                        <img src="<?php echo $userData->profile_img_url?>" alt="profile"><?php echo $userData->username?>
                     </a>
                 </li>
                 <li>
@@ -72,7 +72,7 @@ if ($logined) {
     <body>
     <nav class="white" role="navigation">
         <div class="nav-wrapper container">
-            <a id="logo-container" href="#" class="brand-logo">Logo</a>
+            <a id="logo-container" href="/" class="brand-logo">Logo</a>
             <ul class="right hide-on-med-and-down">
                 <li>
                     <!-- Modal Trigger -->

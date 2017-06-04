@@ -1,6 +1,6 @@
 <!--index banner 1: Map/Search Bar -->
 <div id="index-banner" class="parallax-container" style="overflow: initial">
-    <div class="section no-pad-bot"  style="z-index:1000; position: absolute">
+    <div class="section no-pad-bot" style="z-index:1000; position: absolute">
         <div class="container" style="margin-top: 80px">
             <div class="row center">
                 <h5 class="header col s12 light" style="color: black">Now you are at</h5>
@@ -18,12 +18,15 @@
                     </form>
                 </nav>
             </div>
-            <div class="row center" id="search-area" style=" width: 70%;margin: auto; height: 600px; display: none; background: white; border: 1px solid black;">
+            <div class="row center" id="search-area"
+                 style=" width: 70%;margin: auto; height: 600px; display: none; background: white; border: 1px solid black;">
                 <div style="display: flex; flex-direction: column; width: 100%; height: 100%;">
-                    <div style="flex-basis:300px; height: 300px; border: 1px solid black; line-height: initial;" id="map-view" >
+                    <div style="flex-basis:300px; height: 300px; border: 1px solid black; line-height: initial;"
+                         id="map-view">
                         <div id="map2" style="height: 300px; width: 100%; "></div>
                     </div>
-                    <div style="flex-basis:300px; color: black; border: 1px solid black; line-height: initial;" id="search-view">
+                    <div style="flex-basis:300px; color: black; border: 1px solid black; line-height: initial;"
+                         id="search-view">
                         <input type="text" id="address-input"/>
                         <button type="button" onclick="codeAddress($('#address-input').val())">검색</button>
                         <button type="button" onclick="goToLocation()">이 장소로 가기</button>
@@ -45,11 +48,9 @@
         <!--   Near Posts / Carousel   -->
         <div class="row">
             <div class="carousel">
-                <a class="carousel-item" href="#one!"><img src="http://lorempixel.com/250/250/nature/1"></a>
-                <a class="carousel-item" href="#two!"><img src="http://lorempixel.com/250/250/nature/2"></a>
-                <a class="carousel-item" href="#three!"><img src="http://lorempixel.com/250/250/nature/3"></a>
-                <a class="carousel-item" href="#four!"><img src="http://lorempixel.com/250/250/nature/4"></a>
-                <a class="carousel-item" href="#five!"><img src="http://lorempixel.com/250/250/nature/5"></a>
+                <?php foreach ($posts as $post) { ?>
+                    <a class="carousel-item" href="/post/watch/<?php echo $post['id']?>"><img src="<?php echo $post['post_img_url']?>"></a>
+                <?php } ?>
             </div>
         </div>
 
@@ -123,7 +124,6 @@
         </div>
     </div>
 </div>
-
 
 
 <!--Banner 3-->
@@ -203,29 +203,30 @@
     var map;
     var map2;
     var selectedPoint;
-    $.urlParam = function(name){
+    $.urlParam = function (name) {
         var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-        if (results==null){
+        if (results == null) {
             return null;
         }
-        else{
+        else {
             return decodeURI(results[1]) || 0;
         }
     }
-    function initMap2(){
+
+    function initMap2() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
                 var pos = {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
                 };
-                if($.urlParam('lat') && $.urlParam('lng')){
-                    pos={
+                if ($.urlParam('lat') && $.urlParam('lng')) {
+                    pos = {
                         lat: parseFloat($.urlParam('lat')),
                         lng: parseFloat($.urlParam('lng'))
                     }
                 }
-                map2= new google.maps.Map(document.getElementById('map2'), {
+                map2 = new google.maps.Map(document.getElementById('map2'), {
                     center: pos,
                     zoom: 15
                 });
@@ -233,36 +234,47 @@
         }
     }
     function initMap() {
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                var pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-                if($.urlParam('lat') && $.urlParam('lng')){
-                    pos={
-                        lat: parseFloat($.urlParam('lat')),
-                        lng: parseFloat($.urlParam('lng'))
-                    }
-                }
-                map= new google.maps.Map(document.getElementById('map'), {
-                    center: pos,
-                    zoom: 15
+        if (!($.urlParam('lat') && $.urlParam('lng'))) {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    location.href = "/?lat=" + position.coords.latitude + "&lng=" + position.coords.longitude;
                 });
-                var marker = new google.maps.Marker({
-                    position: pos,
-                    map: map
-                });
-                var geocoder = new google.maps.Geocoder;
-                geocodeLatLng(geocoder, map, pos);
-            }, function () {
-                handleLocationError(true, map.getCenter());
-            });
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, map.getCenter());
+            }
         } else {
-            // Browser doesn't support Geolocation
-            handleLocationError(false, map.getCenter());
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    if ($.urlParam('lat') && $.urlParam('lng')) {
+                        pos = {
+                            lat: parseFloat($.urlParam('lat')),
+                            lng: parseFloat($.urlParam('lng'))
+                        }
+                    }
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        center: pos,
+                        zoom: 15
+                    });
+                    var marker = new google.maps.Marker({
+                        position: pos,
+                        map: map
+                    });
+                    var geocoder = new google.maps.Geocoder;
+                    geocodeLatLng(geocoder, map, pos);
+                }, function () {
+                    handleLocationError(true, map.getCenter());
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, map.getCenter());
+            }
         }
+        // Try HTML5 geolocation.
     }
     function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         if (browserHasGeolocation) {
@@ -288,7 +300,7 @@
     function codeAddress(address) {
         console.log(address)
         var geocoder = new google.maps.Geocoder;
-        geocoder.geocode( { 'address': address}, function(results, status) {
+        geocoder.geocode({'address': address}, function (results, status) {
             if (status == 'OK') {
                 selectedPoint = results[0].geometry.location;
                 map2.setCenter(results[0].geometry.location);
@@ -302,13 +314,13 @@
             }
         });
     }
-    function goToLocation(){
-        if(selectedPoint){
-            location.href="/?lat="+selectedPoint.lat()+"&lng="+selectedPoint.lng();
+    function goToLocation() {
+        if (selectedPoint) {
+            location.href = "/?lat=" + selectedPoint.lat() + "&lng=" + selectedPoint.lng();
         }
     }
-    $(function(){
-        $('#search2').focus(function(){
+    $(function () {
+        $('#search2').focus(function () {
             initMap2();
             $('#search-area').show();
             $('#search2').blur();

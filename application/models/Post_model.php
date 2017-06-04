@@ -13,6 +13,10 @@ class Post_model extends CI_Model
     {
         return $this->db->get_where('post', ['movie_id' => $movie_id])->result_array();
     }
+    public function getPostsByLoc($lat, $lng)
+    {
+        return $this->db->get_where('post', 'distance('.$lat.', '.$lng.', post.lat, post.lng) < 100')->result_array();
+    }
     public function getPost($post_id)
     {
         $this->db->select('post.*, post.id as post_id, user.username, movie.*');
@@ -20,4 +24,5 @@ class Post_model extends CI_Model
         $this->db->join('movie', 'movie.id = post.movie_id');
         return $this->db->get_where('post', ['post.id' => $post_id])->result_array()[0];
     }
+
 }
