@@ -118,7 +118,7 @@
             </nav>
             <ul>
                 <li v-for="item in list">
-                    <button v-on:click="goToMovieDetail(item.id)">{{ item.title }}</button>
+                    <button v-on:click="goToMovieDetail(item.id)" v-html="item.title"></button>
                 </li>
             </ul>
         </div>
@@ -246,10 +246,10 @@
                 if (results[1]) {
                     $("#search2").attr("placeholder", results[1].formatted_address);
                 } else {
-                    window.alert('No results found');
+//                    window.alert('No results found');
                 }
             } else {
-                window.alert('Geocoder failed due to: ' + status);
+//                window.alert('Geocoder failed due to: ' + status);
             }
         });
     }

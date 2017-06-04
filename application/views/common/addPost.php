@@ -40,7 +40,7 @@
                     </div>
                     <ul>
                         <li v-for="loc in location_candidates">
-                            <button type="button" v-on:click="selectAddress(loc.coord, loc.address)">{{ loc.address }}</button>
+                            <button type="button" v-on:click="selectAddress(loc.coord, loc.address)" v-html="loc.address"></button>
                         </li>
                     </ul>
                 </div>
@@ -68,7 +68,7 @@
                     </div>
                     <ul>
                         <li v-for="item in list">
-                            <button type="button" v-on:click="select(item.id, item.title)">{{ item.title }}</button>
+                            <button type="button" v-on:click="select(item.id, item.title)" v-html="item.title"></button>
                         </li>
                     </ul>
                 </div>
