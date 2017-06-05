@@ -1,40 +1,55 @@
-<div id="mask" style="z-index:9999; display: block; background: white; position: fixed; left:0; top:0; height: 100vh; width: 100vw;">
-    <h1>현재 위치를 체크 중입니다</h1>
+<div id="mask" style="z-index:9999; display: block; background: white; position: fixed; left:0; top:100px; height: 100vh; width: 100vw;">
+    <h2 class="deep-purple-text text-darken-4" style="text-align: center; margin-top: 30vh">현재 위치를 찾고 있어요.</h2>
+  <div class="progress deep-purple lighten-3" style="width: 80%; margin: auto; margin-top: 50px;">
+      <div class="indeterminate deep-purple" style="width: 60%"></div>
+  </div>
+
+
 </div>
 
 <!--index banner 1: Map/Search Bar -->
 <div id="index-banner" class="parallax-container" style="overflow: initial">
     <div class="section no-pad-bot" style="z-index:1000; position: absolute">
-        <div class="container" style="margin-top: 80px">
+        <div class="container" style="margin-top: 50px">
             <div class="row center">
-                <h5 class="header col s12 light" style="color: black">Now you are at</h5>
+                <h4 class="header col s12 light deep-purple-text" style="color: black"><?php echo $userData->username?> 님의 현재 위치는,</h4>
             </div>
             <div class="row center" style="width: 70%; margin: auto">
                 <nav>
                     <form>
-                        <div class="nav-wrapper">
+                        <div class="nav-wrapper white">
                             <div class="input-field">
-                                <input type="search" id="search2" placeholder="">
-                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                                <input type="search" id="search2" class="white" placeholder="">
+                                <label class="label-icon" for="search"><i class="material-icons deep-purple-text">search</i></label>
                                 <i class="material-icons">close</i>
                             </div>
                         </div>
                     </form>
                 </nav>
             </div>
-            <div class="row center" id="search-area"
-                 style=" width: 70%;margin: auto; height: 600px; display: none; background: white; border: 1px solid black;">
+            <div class="card row center" id="search-area"
+                 style=" width: 70%;margin: auto; height: 600px; display: none; background: white;">
+
                 <div style="display: flex; flex-direction: column; width: 100%; height: 100%;">
-                    <div style="flex-basis:300px; height: 300px; border: 1px solid black; line-height: initial;"
+
+                    <div style="flex-basis:300px; height: 300px; line-height: initial;"
                          id="map-view">
                         <div id="map2" style="height: 300px; width: 100%; "></div>
                     </div>
-                    <div style="flex-basis:300px; color: black; border: 1px solid black; line-height: initial;"
+
+                    <form class="input-field col s6 " style="margin: auto;">
+                    <div class="row" style="flex-basis:300px; color: black; line-height: initial;"
                          id="search-view">
+
+                        
                         <input type="text" id="address-input"/>
-                        <button type="button" onclick="makeLatLng($('#address-input').val())">검색</button>
-                        <button type="button" onclick="goToLocation()">이 장소로 가기</button>
+                        <label for="address-input" class="deep-purple-text text-lighten-2">장소 다시 검색</label>
+                        <button class="btn waves-effect waves-light deep-purple lighten-2" type="button" onclick="makeLatLng($('#address-input').val())" style="margin-top: 10px">검색</button>
+                        <button class="btn waves-effect waves-light deep-purple lighten-2" type="button" onclick="goToLocation()" style="margin-top: 10px">이 장소로 가기</button>
+
+                        
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -58,20 +73,29 @@
 
 <div class="container">
     <div class="section">
-        <div class="row center">
-            <h5 class="header col s12 light" style="color: black">Near Posts</h5>
+        <div class="row center" style="margin-top: 40px">
+            <i class="material-icons medium deep-purple-text">place</i> 
+            <h5 class="header col s12 light" style="color: black"><br>가까운 사람들의 포스팅</h5>
         </div>
         <!--   Near Posts / Carousel   -->
         <div class="row">
             <?php if (sizeof($posts) !== 0) { ?>
-                <div class="carousel">
+                <div class="carousel" >
                     <?php foreach ($posts as $post) { ?>
-                        <a class="carousel-item" href="/post/watch/<?php echo $post['post_id'] ?>"><img
+                        <a class="carousel-item postergrad" href="/post/watch/<?php echo $post['post_id'] ?>"><img class="poster"
                                     src="<?php echo $post['post_img_url'] ?>"></a>
                     <?php } ?>
                 </div>
+
+
             <?php } else { ?>
-                <h1> NO POSTS YET</h1>
+
+                <div>
+                <h3 class="center"> NO POSTS YET.</h3>
+                </div>
+
+
+               
             <?php } ?>
         </div>
 
@@ -81,6 +105,7 @@
 
 <!-- Near Related Movies : Silder -->
 
+<?php if (sizeof($posts) !== 0) { ?>
 
 <div class="slider">
     <ul class="slides">
@@ -97,6 +122,19 @@
     </ul>
 </div>
 
+<?php } else { ?>
+<div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+        <div class="container">
+            <div class="row center">
+                <h5 class="header col s12 light">아직 가까운 곳에서 포스팅이 올라오지 않아서 영화 목록이 없습니다. </h5>
+            </div>
+        </div>
+    </div>
+    <div class="parallax"><img src="/static/image/background4.png" style="width: 60%" alt="Unsplashed background img 2"></div>
+</div>
+<?php } ?>
+
 
 <!-- movie search -->
 
@@ -106,13 +144,13 @@
 
         <div class="row">
             <div class="col s12 center">
-                <h5 class="header col s12 light" style="color: black">Didn't you find the movie you want among
-                    above?</h5>
+                <h4 class="header col s12 light" style="color: black">아직 원하는 영화를 찾지 못했나요?</h4>
+                <h6 style="margin-bottom: 50px;">아래 검색창에서 영화 제목을 검색하세요.</h6>
             </div>
         </div>
         <div class="row" style="width: 70%; margin: auto">
             <nav>
-                <div class="nav-wrapper">
+                <div class="nav-wrapper deep-purple lighten-1">
                     <div class="input-field">
                         <input type="search" id="search" placeholder="Search by Movie Name" onkeydown="searchMovie('search', app4);">
                         <label class="label-icon" for="search"><i class="material-icons">movie</i></label>
@@ -150,11 +188,11 @@
     <div class="section no-pad-bot">
         <div class="container">
             <div class="row center">
-                <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+                <h5 class="header col s12 light">Movit: Social Media via Location and Films</h5>
             </div>
         </div>
     </div>
-    <div class="parallax"><img src="/static/image/background3.jpg" alt="Unsplashed background img 3"></div>
+    <div class="parallax"><img src="/static/image/background6.png" style="width: 60%" alt="Unsplashed background img 2"></div>
 </div>
 
 

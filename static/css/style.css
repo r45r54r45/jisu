@@ -1,3 +1,28 @@
+
+
+@font-face{
+  font-family: 'Gotham-Bold'; 
+  src: url('/static/fonts/Gotham-Bold.ttf') format('truetype');
+}
+
+@font-face{
+  font-family: 'Gotham-Book';
+  src: url('/static/fonts/Gotham-Book.ttf') format('truetype');
+}
+
+
+@font-face{
+  font-family: 'BMJUA_otf';
+  src: url('/static/fonts/BMJUA_otf.otf') format('truetype');
+}
+
+*{
+  font-family: 'BMJUA_otf';
+
+}
+
+
+
 nav{
   border: 0px;
   box-shadow: 0 0 0 0;
@@ -43,6 +68,7 @@ p {
   }
 
 }
+
 
 .icon-block {
   padding: 0 15px;
@@ -136,3 +162,68 @@ footer.page-footer {
    margin-bottom: -1em;
 }
 
+
+/* design */
+
+.btn {
+
+  border-radius: 20px;
+}
+
+/* map placeholder*/
+
+#index-banner ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #b39ddb;
+}
+#index-banner ::-moz-placeholder { /* Firefox 19+ */
+  color: #b39ddb;
+}
+#index-banner :-ms-input-placeholder { /* IE 10+ */
+  color: #b39ddb;
+}
+#index-banner :-moz-placeholder { /* Firefox 18- */
+  color: #b39ddb;
+}
+
+
+
+
+  /* label color */
+   .input-field label {
+     color: #9575cd;
+   }
+   /* label focus color */
+   .input-field input[type=text]:focus + label {
+     color: #9575cd;
+   }
+   /* label underline focus color */
+   .input-field input[type=text]:focus {
+     border-bottom: 1px solid #9575cd;
+     box-shadow: 0 1px 0 0 #000;
+   }
+
+/* carousel에 gradient */
+.postergrad {
+  display: block;
+  position: relative;
+}
+.postergrad::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: -moz-linear-gradient(left, rgba(69, 104, 220, 0.65) 0%, rgba(176, 106, 179, 0.65) 100%);
+  /* FF3.6+ */
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left, rgba(69, 104, 220, 0.65) 0%, rgba(176, 106, 179, 0.65) 100%);
+  /* Chrome10+,Safari5.1+ */
+
+  /* W3C */
+  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#a6000000', endColorstr='#00000000', GradientType=0);
+  /* IE6-9 */
+}
+.poster {
+  display: block;
+}
