@@ -53,4 +53,7 @@ class Post_model extends CI_Model
         ]);
         return $this->db->insert_id();
     }
+    public function getPostsByUser($userId){
+        return $this->db->get_where('post', ['user_id' => $userId])->result_array();
+    }
 }
