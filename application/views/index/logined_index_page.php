@@ -81,8 +81,8 @@
 <div class="container">
     <div class="section">
         <div class="row center" style="margin-top: 40px">
-            <i class="material-icons medium deep-purple-text">place</i>
-            <h5 class="header col s12 light" style="color: black"><br>가까운 사람들의 포스팅</h5>
+            <i class="material-icons medium deep-purple-text">place</i> 
+            <h4 class="header col s12 light" style="color: black"><br>가까운 사람들의 포스팅</h4>
         </div>
         <!--   Near Posts / Carousel   -->
         <div class="row">
@@ -113,6 +113,8 @@
 <!-- Near Related Movies : Silder -->
 
 <?php if (sizeof($posts) !== 0) { ?>
+<h4 class="center">가까운 사람들이 언급한 영화들</h4>
+<div class="slider">
 
     <div class="slider">
         <ul class="slides">

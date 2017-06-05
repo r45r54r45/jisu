@@ -21,13 +21,15 @@
 
 <div id="modal2" class="modal modal-fixed-footer">
     <div class="modal-content">
-        <h4>Sign Up</h4>
-        <div class="row">
+        <div class="row center" style="margin-top: 25px"><img src="/static/image/logo.png" style="width:100px"></div>
+        <h4 class="center">Sign Up</h4>
+        <h6 class="center">회원가입 창입니다. 아이디와 비밀번호를 만들어주세요.</h6>
+        <div class="row" style="margin-top: 50px">
             <form class="col s12" id="register" action="/api/register" method="post">
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="input-field col s12">
                         <input id="first_name" type="text" class="validate" name="username">
-                        <label for="first_name">Name</label>
+                        <label for="first_name">Username</label>
                     </div>
 <!--                    <div class="input-field col s6">-->
 <!--                        <input id="last_name" type="text" class="validate">-->
