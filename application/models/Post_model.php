@@ -1,6 +1,6 @@
 <?php
 
-
+include_once(realpath($_SERVER["DOCUMENT_ROOT"]) .'/application/libraries/simple_html_dom.php');
 
 class Post_model extends CI_Model
 {
@@ -17,7 +17,21 @@ class Post_model extends CI_Model
     {
         $this->db->select('post.id as post_id, post.*, movie.*');
         $this->db->join('movie', 'movie.id = post.movie_id');
-        return $this->db->get_where('post', 'distance('.$lat.', '.$lng.', post.lat, post.lng) < 100')->result_array();
+        $result =  $this->db->get_where('post', 'distance('.$lat.', '.$lng.', post.lat, post.lng) < 100')->result_array();
+        $new_result = [];
+        foreach ($result as $item) {
+            $html = file_get_html($item['link']);
+            foreach ($html->find(".con_tx") as $text) {
+                $item['summary'] = $text->plaintext;
+                break;
+            }
+            foreach ($html->find('img[alt="STILLCUT"]') as $img) {
+                $item['image'] = $img->src;
+                break;
+            }
+            array_push($new_result, $item);
+        }
+        return $new_result;
     }
     public function getPost($post_id)
     {

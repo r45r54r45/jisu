@@ -1,8 +1,9 @@
-<div id="mask" style="z-index:9999; display: block; background: white; position: fixed; left:0; top:100px; height: 100vh; width: 100vw;">
+<div id="mask"
+     style="z-index:9999; display: block; background: white; position: fixed; left:0; top:100px; height: 100vh; width: 100vw;">
     <h2 class="deep-purple-text text-darken-4" style="text-align: center; margin-top: 30vh">현재 위치를 찾고 있어요.</h2>
-  <div class="progress deep-purple lighten-3" style="width: 80%; margin: auto; margin-top: 50px;">
-      <div class="indeterminate deep-purple" style="width: 60%"></div>
-  </div>
+    <div class="progress deep-purple lighten-3" style="width: 80%; margin: auto; margin-top: 50px;">
+        <div class="indeterminate deep-purple" style="width: 60%"></div>
+    </div>
 
 
 </div>
@@ -12,7 +13,8 @@
     <div class="section no-pad-bot" style="z-index:1000; position: absolute">
         <div class="container" style="margin-top: 50px">
             <div class="row center">
-                <h4 class="header col s12 light deep-purple-text" style="color: black"><?php echo $userData->username?> 님의 현재 위치는,</h4>
+                <h4 class="header col s12 light deep-purple-text" style="color: black"><?php echo $userData->username ?>
+                    님의 현재 위치는,</h4>
             </div>
             <div class="row center" style="width: 70%; margin: auto">
                 <nav>
@@ -20,7 +22,8 @@
                         <div class="nav-wrapper white">
                             <div class="input-field">
                                 <input type="search" id="search2" class="white" placeholder="">
-                                <label class="label-icon" for="search"><i class="material-icons deep-purple-text">search</i></label>
+                                <label class="label-icon" for="search"><i
+                                            class="material-icons deep-purple-text">search</i></label>
                                 <i class="material-icons">close</i>
                             </div>
                         </div>
@@ -38,17 +41,21 @@
                     </div>
 
                     <form class="input-field col s6 " style="margin: auto;">
-                    <div class="row" style="flex-basis:300px; color: black; line-height: initial;"
-                         id="search-view">
+                        <div class="row" style="flex-basis:300px; color: black; line-height: initial;"
+                             id="search-view">
 
-                        
-                        <input type="text" id="address-input"/>
-                        <label for="address-input" class="deep-purple-text text-lighten-2">장소 다시 검색</label>
-                        <button class="btn waves-effect waves-light deep-purple lighten-2" type="button" onclick="makeLatLng($('#address-input').val())" style="margin-top: 10px">검색</button>
-                        <button class="btn waves-effect waves-light deep-purple lighten-2" type="button" onclick="goToLocation()" style="margin-top: 10px">이 장소로 가기</button>
 
-                        
-                    </div>
+                            <input type="text" id="address-input"/>
+                            <label for="address-input" class="deep-purple-text text-lighten-2">장소 다시 검색</label>
+                            <button class="btn waves-effect waves-light deep-purple lighten-2" type="button"
+                                    onclick="makeLatLng($('#address-input').val())" style="margin-top: 10px">검색
+                            </button>
+                            <button class="btn waves-effect waves-light deep-purple lighten-2" type="button"
+                                    onclick="goToLocation()" style="margin-top: 10px">이 장소로 가기
+                            </button>
+
+
+                        </div>
                     </form>
                 </div>
             </div>
@@ -74,15 +81,16 @@
 <div class="container">
     <div class="section">
         <div class="row center" style="margin-top: 40px">
-            <i class="material-icons medium deep-purple-text">place</i> 
+            <i class="material-icons medium deep-purple-text">place</i>
             <h5 class="header col s12 light" style="color: black"><br>가까운 사람들의 포스팅</h5>
         </div>
         <!--   Near Posts / Carousel   -->
         <div class="row">
             <?php if (sizeof($posts) !== 0) { ?>
-                <div class="carousel" >
+                <div class="carousel">
                     <?php foreach ($posts as $post) { ?>
-                        <a class="carousel-item postergrad" href="/post/watch/<?php echo $post['post_id'] ?>"><img class="poster"
+                        <a class="carousel-item postergrad" href="/post/watch/<?php echo $post['post_id'] ?>"><img
+                                    class="poster"
                                     src="<?php echo $post['post_img_url'] ?>"></a>
                     <?php } ?>
                 </div>
@@ -91,11 +99,10 @@
             <?php } else { ?>
 
                 <div>
-                <h3 class="center"> NO POSTS YET.</h3>
+                    <h3 class="center"> NO POSTS YET.</h3>
                 </div>
 
 
-               
             <?php } ?>
         </div>
 
@@ -107,32 +114,36 @@
 
 <?php if (sizeof($posts) !== 0) { ?>
 
-<div class="slider">
-    <ul class="slides">
-        <?php foreach ($posts as $post) { ?>
-            <li>
-                <img src="<?php echo $post['image'] ?>"> <!-- random image -->
-                <div class="caption center-align">
-                    <h3><?php echo $post['title'] ?></h3>
-                    <h5 class="light grey-text text-lighten-3"><?php echo $post['subtitle'] ?></h5>
-                </div>
-            </li>
-        <?php } ?>
+    <div class="slider">
+        <ul class="slides">
+            <?php foreach ($posts as $post) { ?>
+                <li>
+                    <a href="/movie/watch/<?php echo $post['movie_id'] ?>">
+                        <img src="<?php echo $post['image'] ?>">
+                        <div class="caption center-align">
+                            <h3><?php echo $post['title'] ?></h3>
+                            <h5 class="light grey-text text-lighten-3"><?php echo $post['subtitle'] ?></h5>
+                        </div>
+                    </a>
+                </li>
 
-    </ul>
-</div>
+            <?php } ?>
+
+        </ul>
+    </div>
 
 <?php } else { ?>
-<div class="parallax-container valign-wrapper">
-    <div class="section no-pad-bot">
-        <div class="container">
-            <div class="row center">
-                <h5 class="header col s12 light">아직 가까운 곳에서 포스팅이 올라오지 않아서 영화 목록이 없습니다. </h5>
+    <div class="parallax-container valign-wrapper">
+        <div class="section no-pad-bot">
+            <div class="container">
+                <div class="row center">
+                    <h5 class="header col s12 light">아직 가까운 곳에서 포스팅이 올라오지 않아서 영화 목록이 없습니다. </h5>
+                </div>
             </div>
         </div>
+        <div class="parallax"><img src="/static/image/background4.png" style="width: 60%"
+                                   alt="Unsplashed background img 2"></div>
     </div>
-    <div class="parallax"><img src="/static/image/background4.png" style="width: 60%" alt="Unsplashed background img 2"></div>
-</div>
 <?php } ?>
 
 
@@ -152,7 +163,8 @@
             <nav>
                 <div class="nav-wrapper deep-purple lighten-1">
                     <div class="input-field">
-                        <input type="search" id="search" placeholder="Search by Movie Name" onkeydown="searchMovie('search', app4);">
+                        <input type="search" id="search" placeholder="Search by Movie Name"
+                               onkeydown="searchMovie('search', app4);">
                         <label class="label-icon" for="search"><i class="material-icons">movie</i></label>
                         <i class="material-icons">close</i>
                     </div>
@@ -192,7 +204,8 @@
             </div>
         </div>
     </div>
-    <div class="parallax"><img src="/static/image/background6.png" style="width: 60%" alt="Unsplashed background img 2"></div>
+    <div class="parallax"><img src="/static/image/background6.png" style="width: 60%" alt="Unsplashed background img 2">
+    </div>
 </div>
 
 
@@ -210,9 +223,9 @@
             return decodeURI(results[1]) || 0;
         }
     }
-    if(!($.urlParam('lat') && $.urlParam('lng'))){
+    if (!($.urlParam('lat') && $.urlParam('lng'))) {
         $("#mask").show();
-    }else{
+    } else {
         $("#mask").hide();
     }
     function initMap2() {

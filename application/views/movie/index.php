@@ -6,7 +6,12 @@
             <img src="<?php echo $movie['image'] ?>"> <!-- random image -->
             <div class="caption right-align">
                 <h3><?php echo $movie['title'] ?></h3>
-                <h5 class="light grey-text text-lighten-3"><?php echo $movie['subtitle'] ?></h5>
+                <h5 class="light grey-text text-lighten-3">
+                    <?php echo $movie['subtitle'] ?>
+                </h5>
+                <p>
+                    <?php echo $movie['summary'] ?>
+                </p>
             </div>
         </li>
 
