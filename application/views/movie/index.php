@@ -6,7 +6,7 @@
             <img src="<?php echo $movie['image'] ?>"> <!-- random image -->
             <div class="caption right-align">
                 <h3><?php echo $movie['title'] ?></h3>
-                <h5 class="light grey-text text-lighten-3"><?php echo $movie['subtitle'] ?></h5>
+                <h5 class="light grey-text text-lighten-5"><?php echo $movie['subtitle'] ?></h5>
             </div>
         </li>
 
@@ -14,11 +14,11 @@
             <img src="<?php echo $movie['image'] ?>"/>
             <div class="caption right-align">
                 <h3>Detailed Info</h3>
-                <h5 class="light grey-text text-lighten-3">
-                    <p>개봉 년: <?php echo $movie['pubDate'] ?></p>
-                    <p>감독: <?php echo $movie['director'] ?></p>
-                    <p>배우: <?php echo $movie['actor'] ?></p>
-                    <p>평점: <?php echo $movie['userRating'] ?></p>
+                <h5 class="grey-text text-lighten-5">
+                    <p class="grey-text text-lighten-5">개봉연도: <?php echo $movie['pubDate'] ?></p>
+                    <p class="grey-text text-lighten-5">감독: <?php echo $movie['director'] ?></p>
+                    <p class="grey-text text-lighten-5">배우: <?php echo $movie['actor'] ?></p>
+                    <p class="grey-text text-lighten-5">평점: <?php echo $movie['userRating'] ?></p>
                 </h5>
             </div>
         </li>
@@ -33,7 +33,7 @@
 <div class="container">
     <div class="section">
         <div class="row center">
-            <h5 class="header col s12 light" style="color: black">Related Posts</h5>
+            <h5 class="header col s12 light" style="color: black">이 영화에 관해 쓴 포스팅</h5>
         </div>
         <!--   Related / Carousel -->
         <div class="row">
@@ -48,7 +48,16 @@
                 ?>
             </div>
             <?php }else{ ?>
-                <h1> NO POSTS YET</h1>
+                <div class="parallax-container valign-wrapper">
+                    <div class="section no-pad-bot">
+                        <div class="container">
+                            <div class="row center">
+                                <h5 class="header col s12 light">아직 가까운 곳에서 포스팅이 올라오지 않아서 영화 목록이 없습니다. </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="parallax"><img src="/static/image/background4.png" style="width: 60%" alt="Unsplashed background img 2"></div>
+                </div>
             <?php } ?>
         </div>
     </div>

@@ -33,7 +33,7 @@ if ($logined) {
                 <li>
                     <div class="userView">
                         <div class="background">
-                            <img src="/static/image/background2.jpg">
+                            <img src="/static/image/mask.png" style="width: 100%">
                         </div>
                         <a href="#!user"><img class="circle" src="<?php echo $userData->profile_img_url?>"></a>
                         <a href="#!name"><span class="white-text name"><?php echo $userData->username?></span></a>
@@ -100,8 +100,10 @@ if ($logined) {
     <!-- Modal Structure (Log In) -->
     <div id="modal1" class="modal">
         <div class="modal-content">
-            <h4>Modal Header</h4>
-            <div class="row">
+        <div class="row center" style="margin-top: 25px"><img src="/static/image/logo.png" style="width:100px"></div>
+        <h4 class="center">Log In</h4>
+        <h6 class="center">로그인 창입니다. 아이디와 비밀번호를 입력해주세요.</h6>
+        <div class="row" style="margin-top: 50px">
                 <form class="col s12" id="loginForm" action="/api/login" method="post">
                     <div class="row modal-form-row">
                         <div class="input-field col s12">
